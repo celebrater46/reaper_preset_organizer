@@ -16,6 +16,10 @@ main.py を右クリックして Python から実行するとターゲットプ�
 py ファイルを常に Python から実行できるようにしとくとダブルクリックだけで実行できるので便利です。
 
 
+【バージョン情報】
+2024-06-23 18:56:46 - v1.00: Reaper Preset Organizer リリース。
+
+
 ===============================================
 Copyright (C) Enin Fujimi
 https://enin-world.sakura.ne.jp/
