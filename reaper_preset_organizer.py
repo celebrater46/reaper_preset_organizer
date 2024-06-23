@@ -55,6 +55,12 @@ def get_header(lines):
         else:
             return tempstr
 
+def escape_br(lines):
+    new_lines = []
+    for line in lines:
+        new_lines.append(line.replace("\n", ""))
+    return new_lines
+
 def organize_presets(path, file_name):
     f = open(f"{path}{file_name}", "r") # r = readonly
     lines = f.readlines()
@@ -87,7 +93,7 @@ def reaper_preset_organizer():
     f_target_path = open("target_path.ini", "r")
     f_target_files = open("target_files.ini", "r")
     target_path = f_target_path.readlines()
-    target_files = f_target_files.readlines()
+    target_files = escape_br(f_target_files.readlines())
     for file in target_files:
         target = f"{target_path[0]}{file}"
         try:
