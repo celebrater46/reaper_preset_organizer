@@ -83,7 +83,7 @@ def organize_presets(path, file_name):
         num += 1
     f2.close()
 
-def main():
+def reaper_preset_organizer():
     f_target_path = open("target_path.ini", "r")
     f_target_files = open("target_files.ini", "r")
     target_path = f_target_path.readlines()
@@ -104,4 +104,4 @@ def test_backup():
     get_backup("test", lines)
     f.close()
 
-main()
+reaper_preset_organizer()
