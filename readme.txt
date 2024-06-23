@@ -25,8 +25,8 @@ It is made with Python, so if you don't have Python installed on your PC, instal
 Git clone this project. If you don't have git, download the ZIP from my website. However, the version may be slightly older.
 https://enin-world.sakura.ne.jp/files/app/python/reaper_preset_organizer.zip
 
-Insert the directory of the preset configuration file into target_path.ini. One directory per line. If you haven't changed the location of the preset, it will probably be somewhere like C:/Users/<#username>/AppData/Roaming/Reaper/presets/. Make sure to include a slash at the end. If you don't, it will cause a bug.
-In target_files.ini, enter the file names you want to sort automatically, including the extension. One file name per line.
+Delete the .sample at the end of target_path.ini.sample and insert the directory of the preset configuration file. One directory per line. If you haven't made any changes to the location of the presets, they will probably be somewhere like C:/Users/<#username>/AppData/Roaming/Reaper/presets/. Make sure to include a slash at the end. If you don't, it will cause a bug.
+Delete the .sample at the end of target_files.ini.sample and insert the file names you want to automatically sort, including their extensions. One file name per line.
 Right-click "reaper_preset_organizer.py " and run it from Python, and the target preset files will be sorted automatically. A backup file will be created in the backup folder, but we will not provide compensation if the process fails, so please back up any important files yourself.
 It is convenient to always set up py files so that you can run them just by double-clicking them.
 
