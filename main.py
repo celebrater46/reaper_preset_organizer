@@ -15,7 +15,7 @@ def organize_presets():
         tempstr = ""
         if obj_mutch:
             tempstr = obj_mutch.group() + "\r" # Preset03
-            tempstr = tempstr.replace("Preset", "p")
+            tempstr = tempstr.replace("Preset", "pre")
         else:
             tempstr = line
         f2.write(tempstr) # success
