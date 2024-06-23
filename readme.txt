@@ -18,7 +18,7 @@ https://enin-world.sakura.ne.jp/files/app/python/reaper_preset_organizer.zip
 target_path.ini にプリセットの設定ファイルのディレクトリを突っ込みます。1行1ディレクトリ。プリセットの場所は特にいじってなければ C:/Users/<#ユーザー名>/AppData/Roaming/Reaper/presets/ とかにあると思います多分。最後にスラッシュまで入れてください。入れないとバグります。
 target_files.ini に自動ソートしたいファイル名を拡張子込みで入れます。1行1ファイル名。
 
-main.py を右クリックして Python から実行するとターゲットプリセットファイルが勝手にソートされます。一応 backup フォルダにバックアップファイルが作成される仕組みですが、失敗しても補償とかはしないので大切なファイルはご自身でバックアップしてください。
+reaper_preset_organizer.py を右クリックして Python から実行するとターゲットプリセットファイルが勝手にソートされます。一応 backup フォルダにバックアップファイルが作成される仕組みですが、失敗しても補償とかはしないので大切なファイルはご自身でバックアップしてください。
 py ファイルを常に Python から実行できるようにしとくとダブルクリックだけで実行できるので便利です。
 
 It is made with Python, so if you don't have Python installed on your PC, install it (https://www.python.org/downloads/).
@@ -27,7 +27,7 @@ https://enin-world.sakura.ne.jp/files/app/python/reaper_preset_organizer.zip
 
 Insert the directory of the preset configuration file into target_path.ini. One directory per line. If you haven't changed the location of the preset, it will probably be somewhere like C:/Users/<#username>/AppData/Roaming/Reaper/presets/. Make sure to include a slash at the end. If you don't, it will cause a bug.
 In target_files.ini, enter the file names you want to sort automatically, including the extension. One file name per line.
-Right-click main.py and run it from Python, and the target preset files will be sorted automatically. A backup file will be created in the backup folder, but we will not provide compensation if the process fails, so please back up any important files yourself.
+Right-click "reaper_preset_organizer.py " and run it from Python, and the target preset files will be sorted automatically. A backup file will be created in the backup folder, but we will not provide compensation if the process fails, so please back up any important files yourself.
 It is convenient to always set up py files so that you can run them just by double-clicking them.
 
 
