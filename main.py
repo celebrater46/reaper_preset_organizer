@@ -1,5 +1,13 @@
 import re
 
+def get_header(lines):
+    tempstr = ""
+    for line in lines:
+        if line.find("[Preset") < 0:
+            tempstr = tempstr + line
+        else:
+            return tempstr
+
 def organize_presets():
     # print("Hello world!!!!!!!!!")
     # test/vst3-bx_console Focusrite SC.ini
@@ -24,10 +32,21 @@ def organize_presets():
         else:
             tempstr = tempstr + line
         # f2.write(tempstr) # success
+    
+    print(presets)
+    presets_sorted = sorted(presets.items())
+    print(presets_sorted)
+
+    f2.write(get_header(lines))
+
+    num = 0
+    for preset in presets_sorted:
+        converted_preset = re.sub(r'\[Preset\d+\]', f'[Preset{num}]', preset[1]) + "\n"
+        f2.write(converted_preset)
+        num += 1
 
     f.close()
     f2.close()
 
-    print(presets)
 
 organize_presets()
