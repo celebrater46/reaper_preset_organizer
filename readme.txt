@@ -32,6 +32,7 @@ It is convenient to always set up py files so that you can run them just by doub
 
 
 【バージョン情報 - Versions】
+2024-06-25 19:50:46 - v1.01: コードを整理してバグを修正。またディレクトリのバックスラッシュ記述に対応
 2024-06-23 18:56:46 - v1.00: Reaper Preset Organizer リリース。
 
 
