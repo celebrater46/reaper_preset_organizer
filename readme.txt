@@ -15,7 +15,7 @@ Python で作られてるので PC に Python がインストールされてな�
 適当にこのプロフェクトを git clone します。git がなければぼくの HP から ZIP を落としてください。ただし若干バージョンが古い可能性があります。
 https://enin-world.sakura.ne.jp/files/app/python/reaper_preset_organizer.zip
 
-target_path.ini.sample の末尾 .sample を消してプリセットの設定ファイルのディレクトリを突っ込みます。プリセットの場所は特にいじってなければ C:/Users/<#ユーザー名>/AppData/Roaming/Reaper/presets/ とかにあると思います多分。最後にスラッシュまで入れてください。入れないとバグります。
+target_path.ini.sample の末尾 .sample を消してプリセットの設定ファイルのディレクトリを突っ込みます。プリセットの場所は特にいじってなければ C:\Users\<#ユーザー名>\AppData\Roaming\Reaper\presets とかにあると思います多分。
 target_files.ini.sample の末尾 .sample を消して自動ソートしたいファイル名を拡張子込みで入れます。1行1ファイル名。
 
 reaper_preset_organizer.py を右クリックして Python から実行するとターゲットプリセットファイルが勝手にソートされます。一応 backup フォルダにバックアップファイルが作成される仕組みですが、失敗しても補償とかはしないので大切なファイルはご自身でバックアップしてください。
@@ -25,7 +25,7 @@ It is made with Python, so if you don't have Python installed on your PC, instal
 Git clone this project. If you don't have git, download the ZIP from my website. However, the version may be slightly older.
 https://enin-world.sakura.ne.jp/files/app/python/reaper_preset_organizer.zip
 
-Delete the .sample at the end of target_path.ini.sample and insert the directory of the preset configuration file. If you haven't made any changes to the location of the presets, they will probably be somewhere like C:/Users/<#username>/AppData/Roaming/Reaper/presets/. Make sure to include a slash at the end. If you don't, it will cause a bug.
+Delete the .sample at the end of target_path.ini.sample and insert the directory of the preset configuration file. If you haven't made any changes to the location of the presets, they will probably be somewhere like "C:\Users\<#username>\AppData\Roaming\Reaper\presets".
 Delete the .sample at the end of target_files.ini.sample and insert the file names you want to automatically sort, including their extensions. One file name per line.
 Right-click "reaper_preset_organizer.py " and run it from Python, and the target preset files will be sorted automatically. A backup file will be created in the backup folder, but we will not provide compensation if the process fails, so please back up any important files yourself.
 It is convenient to always set up py files so that you can run them just by double-clicking them.
