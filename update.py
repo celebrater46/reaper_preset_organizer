@@ -1,3 +1,4 @@
+# 管理用
 import logging
 from datetime import datetime
 

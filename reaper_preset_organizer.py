@@ -51,9 +51,10 @@ def get_header(lines):
     tempstr = ""
     for line in lines:
         if line.find("[Preset") < 0:
-            tempstr = tempstr + line
+            tempstr += line
         else:
-            return tempstr
+            break
+    return tempstr
 
 def escape_br(lines):
     new_lines = []
@@ -61,15 +62,37 @@ def escape_br(lines):
         new_lines.append(line.replace("\n", ""))
     return new_lines
 
-def organize_presets(path, file_name):
-    f = open(f"{path}{file_name}", "r") # r = readonly
-    lines = f.readlines()
-    get_backup(file_name, lines)
-    f.close()
+def escape_backslash(dir):
+    # print(dir)
+    tempstr = str(dir)
+    return tempstr.replace("\\", "/")
 
+def add_final_slash(dir):
+    if dir[-1:] == "/":
+        return dir
+    else:
+        return f"{dir}/"
+
+def get_path():
+    f = open("target_path.ini", "r")
+    lines = f.readlines()
+    dir = escape_backslash(lines[0])
+    dir = add_final_slash(dir)
+    f.close()
+    return dir
+
+def get_file_names():
+    f = open("target_files.ini", "r")
+    file_names = f.readlines()
+    file_names = escape_br(file_names)
+    f.close()
+    return file_names
+
+def get_preset_dictionary(dir, lines):
     presets = {}
     tempstr = ""
-    f2 = open(f"{path}{file_name}", "w") # w = create or overwrite
+    # f = open(dir, "r")
+    # lines = f.readlines()
     for line in lines:
         obj_mutch = re.search(r'\[Preset\d+\]', line)
         if obj_mutch:
@@ -79,35 +102,80 @@ def organize_presets(path, file_name):
             presets[preset_name] = tempstr + line
         else:
             tempstr = tempstr + line
-    
-    presets_sorted = sorted(presets.items())
-    f2.write(get_header(lines))
+    # f.close()
+    return presets
+
+def rewrite_file(dir, header, presets):
+    f2 = open(dir, "w") # w = create or overwrite
+    # f2.write(get_header(lines))
+    f2.write(header)
     num = 0
-    for preset in presets_sorted:
+    for preset in presets:
         converted_preset = re.sub(r'\[Preset\d+\]', f'[Preset{num}]', preset[1]) + "\n"
         f2.write(converted_preset)
         num += 1
     f2.close()
 
+def organize_presets(path, file_name):
+    f = open(f"{path}{file_name}", "r") # r = readonly
+    lines = f.readlines()
+    get_backup(file_name, lines)
+    f.close()
+
+    presets = get_preset_dictionary(f"{path}{file_name}", lines) # get array of presets
+    # presets = {}
+    # tempstr = ""
+    # f2 = open(f"{path}{file_name}", "w") # w = create or overwrite
+    # for line in lines:
+    #     obj_mutch = re.search(r'\[Preset\d+\]', line)
+    #     if obj_mutch:
+    #         tempstr = obj_mutch.group() + "\n" # Preset03
+    #     elif line.find("Name=") > -1:
+    #         preset_name = line.replace("Name=", "").replace("\n", "")
+    #         presets[preset_name] = tempstr + line
+    #     else:
+    #         tempstr = tempstr + line
+    
+    presets_sorted = sorted(presets.items()) # reorder
+    # f2 = open(f"{path}{file_name}", "w") # w = create or overwrite
+    # f2.write(get_header(lines))
+    # num = 0
+    # for preset in presets_sorted:
+    #     converted_preset = re.sub(r'\[Preset\d+\]', f'[Preset{num}]', preset[1]) + "\n"
+    #     f2.write(converted_preset)
+    #     num += 1
+    # f2.close()
+    header = get_header(lines)
+    rewrite_file(f"{path}{file_name}", header, presets_sorted)
+
 def reaper_preset_organizer():
-    f_target_path = open("target_path.ini", "r")
-    f_target_files = open("target_files.ini", "r")
-    target_path = f_target_path.readlines()
-    target_files = escape_br(f_target_files.readlines())
+    # f_target_path = escape_backslash(open("target_path.ini", "r"))
+    # f_target_path = add_final_slash(f_target_path)
+    # f_target_path = add_final_slash(f_target_path)
+    # f_target_files = open("target_files.ini", "r")
+    # print(f_target_path)
+    # target_path = f_target_path.readlines()
+    target_path = get_path()
+    # target_files = escape_br(f_target_files.readlines())
+    # target_files = escape_br(f_target_files.readlines())
+    target_files = get_file_names()
     for file in target_files:
-        target = f"{target_path[0]}{file}"
+        target = f"{target_path}{file}"
         try:
             with open(target) as f:
-                organize_presets(target_path[0], file)
+                organize_presets(target_path, file)
                 output_log("info", f'Organized "{target}".')
 
         except FileNotFoundError:
             output_log("error", f"{target} does not exists.")
 
-def test_backup():
-    f = open("test/test.txt", "r")
+def test():
+    f = open("target_path.ini", "r")
     lines = f.readlines()
-    get_backup("test", lines)
+    dir = escape_backslash(lines[0])
+    dir = add_final_slash(dir)
+    print(dir)
     f.close()
 
+# test()
 reaper_preset_organizer()
