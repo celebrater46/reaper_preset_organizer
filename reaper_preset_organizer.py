@@ -63,7 +63,6 @@ def escape_br(lines):
     return new_lines
 
 def escape_backslash(dir):
-    # print(dir)
     tempstr = str(dir)
     return tempstr.replace("\\", "/")
 
@@ -91,8 +90,6 @@ def get_file_names():
 def get_preset_dictionary(dir, lines):
     presets = {}
     tempstr = ""
-    # f = open(dir, "r")
-    # lines = f.readlines()
     for line in lines:
         obj_mutch = re.search(r'\[Preset\d+\]', line)
         if obj_mutch:
@@ -102,12 +99,10 @@ def get_preset_dictionary(dir, lines):
             presets[preset_name] = tempstr + line
         else:
             tempstr = tempstr + line
-    # f.close()
     return presets
 
 def rewrite_file(dir, header, presets):
     f2 = open(dir, "w") # w = create or overwrite
-    # f2.write(get_header(lines))
     f2.write(header)
     num = 0
     for preset in presets:
@@ -121,43 +116,13 @@ def organize_presets(path, file_name):
     lines = f.readlines()
     get_backup(file_name, lines)
     f.close()
-
     presets = get_preset_dictionary(f"{path}{file_name}", lines) # get array of presets
-    # presets = {}
-    # tempstr = ""
-    # f2 = open(f"{path}{file_name}", "w") # w = create or overwrite
-    # for line in lines:
-    #     obj_mutch = re.search(r'\[Preset\d+\]', line)
-    #     if obj_mutch:
-    #         tempstr = obj_mutch.group() + "\n" # Preset03
-    #     elif line.find("Name=") > -1:
-    #         preset_name = line.replace("Name=", "").replace("\n", "")
-    #         presets[preset_name] = tempstr + line
-    #     else:
-    #         tempstr = tempstr + line
-    
     presets_sorted = sorted(presets.items()) # reorder
-    # f2 = open(f"{path}{file_name}", "w") # w = create or overwrite
-    # f2.write(get_header(lines))
-    # num = 0
-    # for preset in presets_sorted:
-    #     converted_preset = re.sub(r'\[Preset\d+\]', f'[Preset{num}]', preset[1]) + "\n"
-    #     f2.write(converted_preset)
-    #     num += 1
-    # f2.close()
     header = get_header(lines)
     rewrite_file(f"{path}{file_name}", header, presets_sorted)
 
 def reaper_preset_organizer():
-    # f_target_path = escape_backslash(open("target_path.ini", "r"))
-    # f_target_path = add_final_slash(f_target_path)
-    # f_target_path = add_final_slash(f_target_path)
-    # f_target_files = open("target_files.ini", "r")
-    # print(f_target_path)
-    # target_path = f_target_path.readlines()
     target_path = get_path()
-    # target_files = escape_br(f_target_files.readlines())
-    # target_files = escape_br(f_target_files.readlines())
     target_files = get_file_names()
     for file in target_files:
         target = f"{target_path}{file}"
